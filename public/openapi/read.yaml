@@ -3524,7 +3524,18 @@ paths:
                     properties:
                       loginFormEntry:
                         type: array
-                        items: {}
+                        items:
+                          type: object
+                          properties:
+                            label:
+                              type: string
+                              description: A label for the added block
+                            html:
+                              type: string
+                              description: HTML to render on the login page
+                            styleName:
+                              type: string
+                              description: Custom identifier (value is added to `input[id]` and `label[for]`)
                       alternate_logins:
                         type: boolean
                       authentication:
@@ -3614,30 +3625,30 @@ paths:
                         type: string
                   - $ref: components/schemas/Breadcrumbs.yaml#/Breadcrumbs
                   - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  /api/register/complete:
-    get:
-      tags:
-        - authentication
-      summary: /api/register/complete
-      responses:
-        "200":
-          description: ""
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - type: object
-                    properties:
-                      title:
-                        type: string
-                      errors:
-                        type: array
-                        items: {}
-                      sections:
-                        type: array
-                        items:
-                          type: string
-                  - $ref: components/schemas/CommonProps.yaml#/CommonProps
+  # /api/register/complete:
+  #   get:
+  #     tags:
+  #       - authentication
+  #     summary: /api/register/complete
+  #     responses:
+  #       "200":
+  #         description: ""
+  #         content:
+  #           application/json:
+  #             schema:
+  #               allOf:
+  #                 - type: object
+  #                   properties:
+  #                     title:
+  #                       type: string
+  #                     errors:
+  #                       type: array
+  #                       items: {}
+  #                     sections:
+  #                       type: array
+  #                       items:
+  #                         type: string
+  #                 - $ref: components/schemas/CommonProps.yaml#/CommonProps
   /api/search:
     get:
       tags:
@@ -3721,6 +3732,7 @@ paths:
           required: true
           schema:
             type: string
+          example: testCode
       responses:
         "200":
           description: "A JSON object containing the 2nd step of the user password reset flow"
@@ -3751,6 +3763,7 @@ paths:
           required: true
           schema:
             type: string
+          example: testToken
       responses:
         "200":
           description: "Successfully unsubscribed"
@@ -3767,16 +3780,19 @@ paths:
           required: true
           schema:
             type: string
+          example: 1
         - name: slug
           in: path
           required: true
           schema:
             type: string
+          example: test-topic
         - name: post_index?
           in: path
           required: true
           schema:
             type: string
+          example: 1
       responses:
         "200":
           description: ""
@@ -4113,18 +4129,20 @@ paths:
     get:
       tags:
         - topics
-      summary: /api/topic/{topic_id}/{slug?}
+      summary: /api/topic/{topic_id}/{slug}
       parameters:
         - name: topic_id
           in: path
           required: true
           schema:
             type: string
-        - name: slug?
+          example: 1
+        - name: slug
           in: path
           required: true
           schema:
             type: string
+          example: ''
       responses:
         "200":
           description: ""
@@ -4547,6 +4565,7 @@ paths:
           required: true
           schema:
             type: string
+          example: 1
       responses:
         "200":
           description: "Canonical URL of topic"
@@ -4686,6 +4705,7 @@ paths:
           required: true
           schema:
             type: string
+          example: 1
       responses:
         "200":
           description: ""
@@ -4994,12 +5014,14 @@ paths:
           required: true
           schema:
             type: string
+          example: test
         - name: page
           description: Page number used in pagination
           in: query
           required: false
           schema:
             type: number
+          example: ''
       responses:
         "200":
           description: ""
@@ -7122,6 +7144,7 @@ paths:
           required: true
           schema:
             type: string
+          example: 1
       responses:
         "200":
           description: "Canonical URL of user profile page"
@@ -7136,6 +7159,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -7222,10 +7246,12 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
         - name: page
           in: query
           schema:
             type: number
+          example: ''
       responses:
         "200":
           description: ""
@@ -7312,10 +7338,12 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
         - name: page
           in: query
           schema:
             type: number
+          example: ''
       responses:
         "200":
           description: ""
@@ -7402,6 +7430,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -7462,6 +7491,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -7508,6 +7538,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -7804,6 +7835,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -7849,6 +7881,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -7881,6 +7914,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -8031,6 +8065,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -8443,6 +8478,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -8489,6 +8525,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -8522,6 +8559,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -8555,6 +8593,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -8613,6 +8652,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -8640,6 +8680,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -8667,6 +8708,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -8698,6 +8740,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -8796,6 +8839,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -9103,6 +9147,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -9134,6 +9179,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -9168,6 +9214,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -9197,6 +9244,7 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
       responses:
         "200":
           description: ""
@@ -9225,11 +9273,13 @@ paths:
           required: true
           schema:
             type: string
+          example: admin
         - name: uuid
           in: path
           required: true
           schema:
             type: string
+          example: testuuid
       responses:
         "200":
           description: User session revoked
@@ -9365,18 +9415,20 @@ paths:
     get:
       tags:
         - users
-      summary: /api/user/{userslug}/chats/{roomid?}
+      summary: /api/user/{userslug}/chats/{roomid}
       parameters:
         - name: userslug
           in: path
           required: true
           schema:
             type: string
-        - name: roomid?
+          example: admin
+        - name: roomid
           in: path
           required: true
           schema:
             type: string
+          example: 1
       responses:
         "200":
           description: ""
@@ -9654,17 +9706,18 @@ paths:
                       canViewInfo:
                         type: boolean
                   - $ref: components/schemas/CommonProps.yaml#/CommonProps
-  "/api/chats/{roomid?}":
+  "/api/chats/{roomid}":
     get:
       tags:
         - shorthand
-      summary: /api/chats/{roomid?}
+      summary: /api/chats/{roomid}
       parameters:
-        - name: roomid?
+        - name: roomid
           in: path
           required: true
           schema:
             type: string
+          example: 1
       responses:
         "200":
           description: "Chat identifier resolved"
@@ -9894,6 +9947,7 @@ paths:
           required: true
           schema:
             type: string
+          example: administrators
       responses:
         "200":
           description: ""
@@ -10054,6 +10108,7 @@ paths:
           required: true
           schema:
             type: string
+          example: administrators
       responses:
         "200":
           description: ""
